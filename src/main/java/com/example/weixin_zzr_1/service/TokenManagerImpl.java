@@ -11,6 +11,8 @@ import java.nio.charset.Charset;
 import com.example.weixin_zzr_1.domain.ResponseError;
 import com.example.weixin_zzr_1.domain.ResponseMessage;
 import com.example.weixin_zzr_1.domain.ResponseToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class TokenManagerImpl implements TokenManager {
 
+	private static final Logger LOG = LoggerFactory.getLogger(TokenManagerImpl.class);
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -28,8 +31,8 @@ public class TokenManagerImpl implements TokenManager {
 		// 实际项目绝对不能这样干，因为获取令牌的接口每天最多能够调用2000次（每个appid）。
 		// 这里现在暂时为了简化而不考虑缓存，后面会进行重构。
 
-		String appid = "wxa5b1fb16151df1ff";
-		String appsecret = "0494d1b2490f286f7b6de0f980f1f09f";
+		String appid = "wx375cd9c53c364fc4";
+		String appsecret = "ad91eb3762d1336c39a417173bc47aba";
 
 		String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential"//
 				+ "&appid=" + appid//
@@ -51,6 +54,8 @@ public class TokenManagerImpl implements TokenManager {
 
 			String body = response.body();
 
+			LOG.trace("调用远程接口返回的内容 : \n{}", body);
+
 			if (body.contains("errcode")) {
 				// 出现了错误
 				rm = objectMapper.readValue(body, ResponseError.class);
@@ -70,6 +75,6 @@ public class TokenManagerImpl implements TokenManager {
 
 		throw new RuntimeException("无法获取令牌，因为：错误代码=" //
 				+ ((ResponseError) rm).getErrorCode() //
-				+ "错误描述=" + ((ResponseError) rm).getErrorMessage());
+				+ "，错误描述=" + ((ResponseError) rm).getErrorMessage());
 	}
 }
