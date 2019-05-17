@@ -1,8 +1,9 @@
 package com.example.weixin_zzr_1.repository;
 
-import com.example.weixin_zzr_1.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.example.weixin_zzr_1.domain.User;
 
 @Repository // 此时Spring Data JPA会自动创建此接口的实现类，并且产生实例放入容器中
 // extends JpaRepository : 表示继承Spring Data JPA提供的基本CRUD接口，基本上大部分的操作都已经提供

@@ -6,10 +6,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.Arrays;
 
-import com.example.weixin_zzr_1.domain.InMessage;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
+import com.example.weixin_zzr_1.domain.InMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
@@ -50,7 +50,7 @@ public class JsonRedisSerializer extends Jackson2JsonRedisSerializer<Object> {
 
 	// 在反序列化的时候被调用的方法，负责把字节数组转换为InMessage
 	@Override
-	public Object deserialize(byte[] bytes) throws SerializationException {
+	public InMessage deserialize(byte[] bytes) throws SerializationException {
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 		DataInputStream in = new DataInputStream(bais);

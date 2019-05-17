@@ -3,10 +3,6 @@ package com.example.weixin_zzr_1;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.weixin_zzr_1.domain.InMessage;
-import com.example.weixin_zzr_1.domain.event.EventInMessage;
-import com.example.weixin_zzr_1.processors.EventMessageProcessor;
-import com.example.weixin_zzr_1.service.JsonRedisSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -26,6 +22,10 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
+import com.example.weixin_zzr_1.domain.InMessage;
+import com.example.weixin_zzr_1.domain.event.EventInMessage;
+import com.example.weixin_zzr_1.processors.EventMessageProcessor;
+import com.example.weixin_zzr_1.service.JsonRedisSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
